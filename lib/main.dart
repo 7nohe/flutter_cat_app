@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_cat_app/screens/favorite.dart';
+import 'package:flutter_cat_app/screens/home.dart';
+import 'package:flutter_cat_app/screens/notification.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
+Future main() async {
+  await dotenv.load(fileName: ".env");
   runApp(const MyApp());
 }
 
@@ -28,13 +33,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  Widget currentScreen = const HomeScreen();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Container(),
-        bottom: false,
-      ),
+      body: currentScreen,
       extendBody: true,
       floatingActionButton: const FloatingActionButton(
         onPressed: null,
@@ -52,16 +55,28 @@ class _MyHomePageState extends State<MyHomePage> {
             children: [
               IconButton(
                 icon: const Icon(Icons.home),
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+                    currentScreen = const HomeScreen();
+                  });
+                },
               ),
               IconButton(
                 icon: const Icon(Icons.notifications),
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+                    currentScreen = const NotificationScreen();
+                  });
+                },
               ),
               const SizedBox(width: 40),
               IconButton(
                 icon: const Icon(Icons.favorite),
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+                    currentScreen = const FavoriteScreen();
+                  });
+                },
               ),
               IconButton(
                 icon: const Icon(Icons.menu),
