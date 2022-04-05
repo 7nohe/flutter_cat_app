@@ -32,10 +32,28 @@ class _HomeScreenState extends State<HomeScreen> {
           return ListView.builder(
             itemCount: photos.length,
             itemBuilder: (context, index) {
-              return Column(
-                children: <Widget>[
-                  Image.network(photos[index].urls['regular'])
-                ],
+              return Padding(
+                padding: const EdgeInsets.fromLTRB(24, 12, 24, 12),
+                child: GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          fullscreenDialog: true,
+                          builder: (BuildContext context) => PhotoModal(
+                            photo: photos[index],
+                          ),
+                        ),
+                      );
+                    },
+                    child: Hero(
+                        tag: 'photo_' + photos[index].id,
+                        child: Card(
+                            clipBehavior: Clip.antiAlias,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(24),
+                            ),
+                            child:
+                                Image.network(photos[index].urls['regular'])))),
               );
             },
           );
@@ -46,6 +64,35 @@ class _HomeScreenState extends State<HomeScreen> {
         return const Center(child: CircularProgressIndicator());
       },
       future: getPhotos(),
+    );
+  }
+}
+
+class PhotoModal extends StatelessWidget {
+  final Photo photo;
+  const PhotoModal({Key? key, required this.photo}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Stack(
+        children: <Widget>[
+          Center(
+            child: GestureDetector(
+              onTap: () {
+                Navigator.of(context).pop();
+              },
+              child: Hero(
+                tag: 'photo_' + photo.id,
+                child: Image.network(
+                  photo.urls['regular'],
+                  fit: BoxFit.contain,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
