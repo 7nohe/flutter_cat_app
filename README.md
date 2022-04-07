@@ -2,6 +2,9 @@
 
 - Flutter 2.10.4
 
+![flutter_cat_app](https://user-images.githubusercontent.com/9207663/162139808-3b7f26dd-2f32-4c60-bc70-deac17a40130.gif)
+
+
 ## Flutter Installation
 
 https://docs.flutter.dev/get-started/install
