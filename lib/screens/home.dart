@@ -54,23 +54,19 @@ class PhotoModal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: <Widget>[
-          Center(
-            child: GestureDetector(
-              onTap: () {
-                Navigator.of(context).pop();
-              },
-              child: Hero(
-                tag: 'photo_' + photo.id,
-                child: Image.network(
-                  photo.urls['regular'],
-                  fit: BoxFit.contain,
-                ),
-              ),
+      body: Center(
+        child: GestureDetector(
+          onTap: () {
+            Navigator.of(context).pop();
+          },
+          child: Hero(
+            tag: 'photo_' + photo.id,
+            child: Image.network(
+              photo.urls['regular'],
+              fit: BoxFit.contain,
             ),
           ),
-        ],
+        ),
       ),
     );
   }

@@ -90,7 +90,6 @@ class _MyHomePageState extends State<MyHomePage> {
           elevation: 8,
           shape: const CircularNotchedRectangle(),
           notchMargin: 4,
-          clipBehavior: Clip.antiAliasWithSaveLayer,
           child: Padding(
             padding: const EdgeInsets.only(left: 16, right: 16),
             child: Row(
